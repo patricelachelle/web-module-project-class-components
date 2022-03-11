@@ -2,46 +2,54 @@ import React from 'react';
 import TodoList from './TodoList';
 import Form from './Form';
 
+let idx = 0
+const getIdx = () => ++idx
+
 const todos = [
   {
     task: 'Lose my Mind',
-    id: 1528817077286,
+    id: getIdx(),
     completed: false
   },
   {
     task: 'Lose my Mind, Again',
-    id: 1528817084358,
+    id: getIdx(),
     completed: false
   },
   {
     task: 'Lose my Mind, Yet, Again',
-    id: 1528817084359,
+    id: getIdx(),
     completed: false
   },
   {
     task: 'Lose my Mind, For the Fourth Time',
-    id: 1528817084399,
+    id: getIdx(),
     completed: false
   },
   {
     task: 'Start to Lose my Mind, But Stop',
-    id: 1528817084999,
+    id: getIdx(),
     completed: false
   },
   {
     task: 'Finally Get A Grip',
-    id: 1528899984358,
+    id: getIdx(),
     completed: false
   }
 ];
 
+const initialState = {
+  todos: todos,
+}
+
 class App extends React.Component {
-    constructor() {
-    super()
-    this.state = {
-      todos: todos
-    }
-  }
+    // constructor() {
+    // super()
+    // this.state = {
+    //   todos: todos
+    // }
+    // }
+    state = initialState
 
   handleTaskToggle = (id) => {    
     this.setState({
@@ -62,13 +70,14 @@ class App extends React.Component {
   handleTaskAdd = (taskName) => {
     const task = {
       task: taskName,
-      id: Date.now(),
+      id: getIdx(),
       completed: false
     }
 
     this.setState({
       ...this.state,
-      todos: [...this.state.todos, task]
+      todos: [...this.state.todos, task],
+      form: initialState
     })
   }
 
